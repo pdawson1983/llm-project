@@ -9,7 +9,7 @@ def main():
     calculator = Calculator()
     expression = ""
     if len(sys.argv) <= 1:
-        expression = "2 + 2" # default expression
+        expression = "2 + 2"  # default expression
     else:
         expression = " ".join(sys.argv[1:])
     try:

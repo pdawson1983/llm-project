@@ -1,4 +1,5 @@
 # calculator.py
+import random
 
 class Calculator:
     def __init__(self):
@@ -7,19 +8,28 @@ class Calculator:
             "-": lambda a, b: a - b,
             "*": lambda a, b: a * b,
             "/": lambda a, b: a / b,
+            "%": lambda a, b: a % b,
         }
         self.precedence = {
             "+": 1,
             "-": 1,
             "*": 2,
             "/": 2,
+            "%": 2,
         }
+        self.quotes = [
+            "Pure mathematics is, in its way, the poetry of logical ideas. - Albert Einstein",
+            "Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding. - William Paul Thurston",
+            "The only way to learn mathematics is to do mathematics. - Paul Halmos",
+            "Mathematics is the most beautiful and most powerful creation of the human spirit. - Stefan Banach",
+        ]
 
     def evaluate(self, expression):
         if not expression or expression.isspace():
-            return None
+            return None, self._get_quote()
         tokens = expression.strip().split()
-        return self._evaluate_infix(tokens)
+        result = self._evaluate_infix(tokens)
+        return result, self._get_quote()
 
     def _evaluate_infix(self, tokens):
         values = []
@@ -59,3 +69,6 @@ class Calculator:
         b = values.pop()
         a = values.pop()
         values.append(self.operators[operator](a, b))
+
+    def _get_quote(self):
+        return random.choice(self.quotes)
