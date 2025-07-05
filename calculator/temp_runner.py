@@ -1,8 +1,6 @@
-import subprocess
+import sys
+sys.argv = ["main.py", "5", "%", "2"]
+import main
 
-expression = "3 + 7 * 2"
-
-result = subprocess.run(['python', 'main.py', expression], capture_output=True, text=True)
-
-print(result.stdout)
-print(result.stderr)
+if __name__ == "__main__":
+  main.main()
